@@ -6,7 +6,6 @@
 
 一个基于现代Web技术的匿名告解室平台，支持贴文提交和天堂/地狱投票系统。
 
-![Demo Screenshot](https://example.com/screenshot.jpg)
 
 ## ✨ 主要功能
 
