@@ -41,7 +41,7 @@
 ### 本地开发
 ```bash
 # 克隆仓库
-git clone https://github.com/yourusername/confession-chapel.git
+git clone https://github.com/Kanu1213/confession-chapel.git
 
 # 安装依赖
 cd confession-chapel
@@ -53,3 +53,115 @@ cp .env.example .env
 
 # 启动开发服务器
 npm run dev # 同时启动前端和后端
+```
+
+### 生产构建
+```bash
+# 构建前端
+cd frontend
+npm run build
+
+# 启动服务
+docker-compose up -d --build
+
+# 访问地址
+http://localhost:3000
+```
+
+## 🔧 配置指南
+
+### 关键环境变量
+```ini
+# MongoDB连接
+MONGODB_URI=mongodb://mongo:27017/confession
+
+# JWT配置
+JWT_SECRET=your_secure_secret_here
+JWT_EXPIRES_IN=7d
+
+# 速率限制
+RATE_LIMIT_WINDOW=15m
+RATE_LIMIT_MAX=100
+
+# 敏感词过滤
+BAN_WORDS=badword1,badword2,...
+```
+
+### 管理员账户设置
+1. 访问 `/admin/register` 注册第一个账户
+2. 进入MongoDB shell执行：
+```javascript
+db.users.updateOne(
+  { username: "admin" },
+  { $set: { isAdmin: true } }
+)
+```
+
+## 📦 部署指南
+
+### 服务器要求
+- 1GB RAM 以上
+- Ubuntu 22.04 LTS
+- 开放端口：80, 443, 27017
+
+### 生产部署步骤
+```bash
+# 克隆仓库
+git clone https://github.com/Kanu1213/confession-chapel.git
+cd confession-chapel
+
+# 设置SSL证书
+sudo certbot --nginx -d yourdomain.com
+
+# 启动服务
+docker-compose -f docker-compose.prod.yml up -d
+
+# 验证服务状态
+docker-compose logs -f app
+```
+
+### 更新部署
+```bash
+git pull origin main
+docker-compose down
+docker-compose up -d --build
+```
+
+## 🛡️ 安全措施
+
+1. **输入过滤**：
+   - 使用DOMPurify清理HTML输入
+   - 正则表达式过滤敏感内容
+
+2. **访问控制**：
+   ```nginx
+   # 禁止直接访问API文档
+   location /api-docs {
+     deny all;
+     return 403;
+   }
+   ```
+
+3. **头部安全**：
+   ```nginx
+   add_header X-Frame-Options "SAMEORIGIN";
+   add_header X-Content-Type-Options "nosniff";
+   add_header Referrer-Policy "strict-origin-when-cross-origin";
+   ```
+
+## 🤝 贡献指南
+
+欢迎通过以下方式参与贡献：
+1. 提交Issue报告问题
+2. Fork仓库并提交Pull Request
+3. 完善项目文档
+
+代码规范：
+- 使用Prettier进行代码格式化
+- 重要功能需包含单元测试
+- 提交信息遵循Conventional Commits规范
+
+## 📄 许可证
+
+本项目采用 [MIT License](LICENSE)
+
