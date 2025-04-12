@@ -1,9 +1,5 @@
 # Confession Chapel Web Application 🕊️😈
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Node.js CI](https://github.com/yourusername/confession-chapel/actions/workflows/node.js.yml/badge.svg)](https://github.com/yourusername/confession-chapel/actions)
-[![Docker Image CI](https://github.com/yourusername/confession-chapel/actions/workflows/docker-image.yml/badge.svg)](https://github.com/yourusername/confession-chapel/actions)
-
 一个基于现代Web技术的匿名告解室平台，支持贴文提交和天堂/地狱投票系统。
 
 
